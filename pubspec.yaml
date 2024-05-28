@@ -1,0 +1,56 @@
+name: notely
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  gap: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+
+  fonts:
+    - family: nunito-black
+      fonts:
+        - asset: assets/fonts/Nunito-Black.ttf
+
+    - family: nunito-bold
+      fonts:
+        - asset: assets/fonts/Nunito-Bold.ttf
+
+    - family: nunito-extraBold
+      fonts:
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+
+    - family: nunito-regular
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+
+    - family: titan
+      fonts:
+        - asset: assets/fonts/TitanOne-Regular.ttf
+
+
