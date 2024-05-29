@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notely/app/app.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/features/onboarding/domain/onboard.dart';
+import 'package:notely/features/onboarding/presentation/widget/dot_indicator.dart';
+import 'package:notely/features/onboarding/presentation/widget/onboard_content.dart';
 
 List<OnBoard> screens = [
   OnBoard(
@@ -14,7 +16,7 @@ List<OnBoard> screens = [
       description: AppStrings.onboardingTextBody_2),
   OnBoard(
       image: ImageAsset.premium,
-      title: AppStrings.onboardingTextBody_3,
+      title: AppStrings.onboardingTextMain_3,
       description: AppStrings.onboardingTextBody_3),
 ];
 
@@ -26,28 +28,69 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  late PageController pageController;
+  int pageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    pageController = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.background,
-      body: Padding(
+    return  Padding(
         padding: const EdgeInsets.all(30),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Gap(30),
-              const AppTitle(),
-              const Gap(90),
-              Image.asset(ImageAsset.onboarding),
-              const Gap(10),
-              const ScreenTitle(title: AppStrings.onboardingTextMain),
-              const Gap(10),
-              const BodyText(title: AppStrings.onboardingTextBody, fontSize: 16)
-            ],
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          const Gap(30),
+          const AppTitle(),
+          const Gap(130),
+          Expanded(
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: screens.length,
+              onPageChanged: (value) => setState(() {
+                pageIndex = value;
+              }),
+              itemBuilder: (context, index) => OnboardContent(
+                  image: screens[index].image,
+                  title: screens[index].title,
+                  description: screens[index].description),
+            ),
           ),
-        ),
-      ),
+          const Gap(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              screens.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(right: 3),
+                child: DotIndicator(
+                  isActive: index == pageIndex,
+                ),
+              ),
+            ),
+          ),
+          const Gap(50),
+          MainButton(
+            buttonText: AppStrings.getStarted,
+            disabled: false,
+            loading: false,
+            callback: () {},
+          ),
+          const BodyText(
+              title: AppStrings.alreadyAccount,
+              fontSize: 16,
+              fontColor: AppColor.buttonColor,
+              fontFamily: Fonts.nunitoExtraBold,),
+        ]),
     );
   }
 }

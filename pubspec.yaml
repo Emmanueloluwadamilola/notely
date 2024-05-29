@@ -15,6 +15,8 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   gap: ^3.0.1
+  provider: ^6.1.2
+  flutter_staggered_grid_view: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -30,20 +32,24 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/icons/
 
 
   fonts:
     - family: nunito-black
       fonts:
         - asset: assets/fonts/Nunito-Black.ttf
+          weight: 900
 
     - family: nunito-bold
       fonts:
         - asset: assets/fonts/Nunito-Bold.ttf
+          weight: 700
 
     - family: nunito-extraBold
       fonts:
         - asset: assets/fonts/Nunito-ExtraBold.ttf
+          weight: 800
 
     - family: nunito-regular
       fonts:

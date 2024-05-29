@@ -16,27 +16,30 @@ class MainButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: disabled || loading ? null : callback,
-      child: Container(
-        decoration: BoxDecoration(
-          color: disabled ? AppColor.inactiveButton : AppColor.buttonColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        height: 75,
-        width: double.infinity,
-        child: Center(
-          child: loading
-              ? const CupertinoActivityIndicator(
-                  color: AppColor.buttonTextColor,
-                )
-              : Text(
-                  buttonText,
-                  style: const TextStyle(
-                      fontFamily: Fonts.nunitoBlack,
-                      fontSize: 20,
-                      color: AppColor.buttonTextColor),
-                ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: GestureDetector(
+        onTap: disabled || loading ? null : callback,
+        child: Container(
+          decoration: BoxDecoration(
+            color: disabled ? AppColor.inactiveButton : AppColor.buttonColor,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          height: 75,
+          width: double.infinity,
+          child: Center(
+            child: loading
+                ? const CupertinoActivityIndicator(
+                    color: AppColor.buttonTextColor,
+                  )
+                : Text(
+                    buttonText,
+                    style: const TextStyle(
+                        fontFamily: Fonts.nunitoBlack,
+                        fontSize: 20,
+                        color: AppColor.buttonTextColor),
+                  ),
+          ),
         ),
       ),
     );

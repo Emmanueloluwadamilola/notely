@@ -10,43 +10,36 @@ class AppTitle extends StatelessWidget {
       AppStrings.appTitle,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontFamily: Fonts.titan, fontSize: 20, color: AppColor.titleColor),
-    );
-  }
-}
-
-class ScreenTitle extends StatelessWidget {
-  const ScreenTitle({super.key, required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-          fontFamily: Fonts.nunitoBlack,
-          fontSize: 20,
-          fontWeight: FontWeight.w900,
-          color: AppColor.titleColor),
+        fontFamily: Fonts.titan,
+        fontSize: 20,
+        color: AppColor.titleColor,
+      ),
     );
   }
 }
 
 class BodyText extends StatelessWidget {
-  const BodyText({super.key, required this.title, required this.fontSize});
-  final String title;
+  const BodyText(
+      {super.key,
+      required this.title,
+      required this.fontSize,
+      required this.fontColor,
+      required this.fontFamily});
+  final String? title;
   final double fontSize;
+  final Color fontColor;
+  final String fontFamily;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      title,
+      title!,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontFamily: Fonts.nunitoBold,
-          fontSize: fontSize,
-          color: AppColor.textColor),
+        fontFamily: fontFamily,
+        fontSize: fontSize,
+        color: fontColor,
+      ),
     );
   }
 }
