@@ -24,17 +24,18 @@ class BodyText extends StatelessWidget {
       required this.title,
       required this.fontSize,
       required this.fontColor,
-      required this.fontFamily});
+      required this.fontFamily, required this.textAlign});
   final String? title;
   final double fontSize;
   final Color fontColor;
   final String fontFamily;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title!,
-      textAlign: TextAlign.center,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: fontFamily,
         fontSize: fontSize,

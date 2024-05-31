@@ -6,16 +6,20 @@ import 'package:notely/app/style/style.dart';
 class InputText extends StatefulWidget {
   InputText(
       {super.key,
+      this.showPassword = false,
       required this.isPassword,
       required this.controller,
       required this.keyboard,
       required this.focus,
-      required this.title});
+      required this.title,
+    });
   bool isPassword;
-  final TextEditingController controller;
+   TextEditingController controller;
   final TextInputType keyboard;
   final FocusNode focus;
   final String title;
+  bool showPassword;
+
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -27,6 +31,7 @@ class _InputTextState extends State<InputText> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.title,
@@ -47,26 +52,37 @@ class _InputTextState extends State<InputText> {
             child: TextField(
               controller: widget.controller,
               keyboardType: widget.keyboard,
-              obscureText: widget.isPassword,
+              obscureText: widget.isPassword && widget.showPassword,
               cursorColor: AppColor.buttonColor,
               focusNode: widget.focus,
+              onChanged: (value) {
+                setState(() {
+                  widget.controller.text = value;
+                });
+                
+              },
               style: const TextStyle(
                   fontFamily: Fonts.nunitoBold,
                   fontSize: 16,
                   color: AppColor.textColor),
               decoration: InputDecoration(
-                suffix: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.isPassword = !widget.isPassword;
-                    });
-                  },
-                  icon: Icon(
-                    widget.isPassword ? Icons.visibility : Icons.visibility_off,
-                    color: AppColor.textColor,
-                  ),
-                ),
-              ),
+                  contentPadding: const EdgeInsets.only(left: 15, right: 5),
+                  border: InputBorder.none,
+                  suffix: widget.isPassword
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.showPassword = !widget.showPassword;
+                            });
+                          },
+                          icon: Icon(
+                            widget.showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: AppColor.textColor,
+                          ),
+                        )
+                      : null),
             ),
           ),
         ],

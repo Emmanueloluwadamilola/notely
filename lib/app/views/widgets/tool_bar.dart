@@ -9,7 +9,8 @@ class ToolBarWidget extends StatelessWidget {
       required this.suffixIcon,
       required this.prefixOnPress,
       required this.suffixOnPress,
-      required this.isIcon, this.prefixicon});
+      required this.isIcon,
+      this.prefixicon});
   final String title;
   final ImageProvider<Object>? prefixImageIcon;
   final IconData? prefixicon;
@@ -21,12 +22,15 @@ class ToolBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
           onPressed: prefixOnPress,
           icon: isIcon
-              ? Icon(prefixicon, color: AppColor.titleColor,)
+              ? Icon(
+                  prefixicon,
+                  color: AppColor.titleColor,
+                )
               : ImageIcon(
                   prefixImageIcon,
                   color: AppColor.titleColor,

@@ -1,13 +1,8 @@
-import 'package:flutter/material.dart';
+
 
 class AuthState {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-
-  FocusNode nameFocus = FocusNode();
-  FocusNode passwordFocus = FocusNode();
-  FocusNode emailFocus = FocusNode();
-
+  String name = '';
+  String email = '';
+  String password = '';
   bool isLoading = false;
 }

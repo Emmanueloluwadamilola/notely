@@ -2,7 +2,7 @@ class AppStrings {
   static const appTitle = 'NOTELY';
   static const getStarted = 'GET STARTED';
   static const alreadyAccount = 'Already have an account?';
-  static const dontHaveAccount = "Dont't have an Account?";
+  static const dontHaveAccount = "Don't have an Account?";
   static const onboardingTextMain =
       'World’s Safest And\n Largest Digital Notebook';
   static const onboardingTextBody =

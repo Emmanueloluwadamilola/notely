@@ -24,13 +24,13 @@ class OnboardContent extends StatelessWidget {
             title: title,
             fontSize: 20,
             fontColor: AppColor.titleColor,
-            fontFamily: Fonts.nunitoBlack),
+            fontFamily: Fonts.nunitoBlack, textAlign: TextAlign.center,),
         const Spacer(),
         BodyText(
           title: description,
           fontSize: 16,
           fontColor: AppColor.textColor,
-          fontFamily: Fonts.nunitoBold,
+          fontFamily: Fonts.nunitoBold, textAlign: TextAlign.center,
         ),
       ],
     );
