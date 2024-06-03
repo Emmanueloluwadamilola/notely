@@ -33,7 +33,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       });
 
       _noteProvider?.listen((event) {
-        if (event is Note) {
+        if (event is NoteModel) {
           Navigator.pop(context);
         }
       });
@@ -50,53 +50,55 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       return Scaffold(
         backgroundColor: AppColor.background,
         body: SafeArea(
-          child: Column(
-            children: [
-              const Gap(10),
-              ToolBarWidget(
-                  title: AppStrings.editNotes,
-                  suffixIcon: Icons.more_vert_outlined,
-                  prefixicon: Icons.arrow_back_ios_new_outlined,
-                  prefixOnPress: () {
-                    Navigator.pop(context);
-                  },
-                  suffixOnPress: () {},
-                  isIcon: true),
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 15, right: 20, left: 20, top: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: titleController,
-                        focusNode: titleNode,
-                        cursorColor: AppColor.buttonColor,
-                        decoration: const InputDecoration(
-                            hintText: 'title', border: InputBorder.none),
-                        style: const TextStyle(
-                            fontFamily: Fonts.nunitoBlack,
-                            fontSize: 24,
-                            color: AppColor.titleColor),
-                      ),
-                      TextField(
-                        controller: bodyController,
-                        focusNode: bodyNode,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        cursorColor: AppColor.buttonColor,
-                        decoration: const InputDecoration(
-                            hintText: 'Type here', border: InputBorder.none),
-                        style: const TextStyle(
-                            fontFamily: Fonts.nunitoBold,
-                            fontSize: 18,
-                            color: AppColor.textColor),
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Gap(10),
+                ToolBarWidget(
+                    title: AppStrings.editNotes,
+                    suffixIcon: Icons.more_vert_outlined,
+                    prefixicon: Icons.arrow_back_ios_new_outlined,
+                    prefixOnPress: () {
+                      Navigator.pop(context);
+                    },
+                    suffixOnPress: () {},
+                    isIcon: true),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 15, right: 20, left: 20, top: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: titleController,
+                          focusNode: titleNode,
+                          cursorColor: AppColor.buttonColor,
+                          decoration: const InputDecoration(
+                              hintText: 'title', border: InputBorder.none),
+                          style: const TextStyle(
+                              fontFamily: Fonts.nunitoBlack,
+                              fontSize: 24,
+                              color: AppColor.titleColor),
+                        ),
+                        TextField(
+                          controller: bodyController,
+                          focusNode: bodyNode,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          cursorColor: AppColor.buttonColor,
+                          decoration: const InputDecoration(
+                              hintText: 'Type here', border: InputBorder.none),
+                          style: const TextStyle(
+                              fontFamily: Fonts.nunitoBold,
+                              fontSize: 18,
+                              color: AppColor.textColor),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         floatingActionButton:

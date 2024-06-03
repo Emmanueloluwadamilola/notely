@@ -68,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 description: screens[index].description),
           ),
         ),
-        const Gap(15),
+        const Gap(10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
@@ -81,7 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
         ),
-        const Gap(50),
+        const Gap(40),
         MainButton(
           buttonText: AppStrings.getStarted,
           disabled: false,
@@ -96,7 +96,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             title: AppStrings.alreadyAccount,
             fontSize: 16,
             fontColor: AppColor.buttonColor,
-            fontFamily: Fonts.nunitoExtraBold, textAlign: TextAlign.center,
+            fontFamily: Fonts.nunitoExtraBold,
+            textAlign: TextAlign.center,
           ),
         ),
       ]),

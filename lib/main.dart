@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/features/auth/presentation/manager/auth_provider.dart';
 import 'package:notely/features/auth/presentation/pages/sign_in.dart';
 import 'package:notely/features/auth/presentation/pages/sign_up.dart';
+import 'package:notely/features/home/domain/note.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
@@ -10,7 +13,12 @@ import 'package:notely/features/onboarding/presentation/pages/onboarding_screen.
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'boxes.dart';
+
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(NoteModelAdapter());
+  noteBox = await Hive.openBox<NoteModel>('personBox');
   runApp(const MyApp());
 }
 
@@ -52,7 +60,7 @@ class MyApp extends StatelessWidget {
         return settings.route(const AllNoteScreen());
       case OnboardingScreen.id:
         return settings.route(const OnboardingScreen());
-         case AddNoteScreen.id:
+      case AddNoteScreen.id:
         return settings.route(const AddNoteScreen());
 
       default:
