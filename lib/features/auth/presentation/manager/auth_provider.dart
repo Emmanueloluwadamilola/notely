@@ -1,8 +1,7 @@
-
 import 'package:notely/confiq/helpers/disposable_provider.dart';
 import 'package:notely/features/auth/presentation/manager/auth_state.dart';
 
-class AuthProvider extends DisposableProvider {
+class AuthenticationProvider extends DisposableProvider {
   final state = AuthState();
 
   setName(name) {
@@ -19,7 +18,7 @@ class AuthProvider extends DisposableProvider {
     state.password = password;
     notifyListeners();
   }
-  
+
   @override
   void disposeValues() {
     // TODO: implement disposeValues

@@ -20,7 +20,7 @@ class _SignUpState extends State<SignUp> {
   FocusNode nameFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
-  AuthProvider? _provider;
+  AuthenticationProvider? _provider;
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
+    return Consumer<AuthenticationProvider>(
       builder: (BuildContext context, provider, _) {
         _provider ??= provider;
         final state = provider.state;
@@ -73,14 +73,16 @@ class _SignUpState extends State<SignUp> {
                           title: AppStrings.createAccount,
                           fontSize: 24,
                           fontColor: AppColor.titleColor,
-                          fontFamily: Fonts.nunitoBlack, textAlign: TextAlign.center,
+                          fontFamily: Fonts.nunitoBlack,
+                          textAlign: TextAlign.center,
                         ),
                         const Gap(10),
                         const BodyText(
                           title: AppStrings.createAccountText,
                           fontSize: 16,
                           fontColor: AppColor.textColor,
-                          fontFamily: Fonts.nunitoBold, textAlign: TextAlign.center,
+                          fontFamily: Fonts.nunitoBold,
+                          textAlign: TextAlign.center,
                         ),
                         const Gap(30),
                         InputText(
@@ -122,7 +124,8 @@ class _SignUpState extends State<SignUp> {
                             title: AppStrings.alreadyAccount,
                             fontSize: 16,
                             fontColor: AppColor.buttonColor,
-                            fontFamily: Fonts.nunitoExtraBold, textAlign: TextAlign.center,
+                            fontFamily: Fonts.nunitoExtraBold,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],

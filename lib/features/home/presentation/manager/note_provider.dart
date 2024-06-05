@@ -22,6 +22,11 @@ class NoteProvider extends DisposableProvider {
     notifyListeners();
   }
 
+  deleteNote(int index) {
+    state.allNotes.removeAt(index);
+    notifyListeners();
+  }
+
   @override
   void disposeValues() {
     // TODO: implement disposeValues

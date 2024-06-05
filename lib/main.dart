@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/features/auth/presentation/manager/auth_provider.dart';
@@ -16,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'boxes.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   noteBox = await Hive.openBox<NoteModel>('personBox');
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (_) => NoteProvider()),
         ChangeNotifierProvider(create: (_) => SettingProvider()),
       ],
@@ -40,9 +43,20 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: const Scaffold(
+        home:  Scaffold(
           backgroundColor: AppColor.background,
-          body: OnboardingScreen(),
+          body:  StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          // User is logged in
+          return const AllNoteScreen(); // Replace with your app's home screen
+        } else {
+          // User is not logged in
+          return const OnboardingScreen();
+        }
+      },
+    ),
           // floatingActionButton: ,
         ),
         onGenerateRoute: _generateRoute,

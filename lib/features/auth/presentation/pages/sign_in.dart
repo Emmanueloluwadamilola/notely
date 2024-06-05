@@ -19,7 +19,7 @@ class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController();
   FocusNode passwordFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
-  AuthProvider? _provider;
+  AuthenticationProvider? _provider;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
+    return Consumer<AuthenticationProvider>(
       builder: (BuildContext context, provider, _) {
         _provider ??= provider;
         final state = provider.state;
@@ -68,14 +68,16 @@ class _SignInState extends State<SignIn> {
                           title: AppStrings.login,
                           fontSize: 24,
                           fontColor: AppColor.titleColor,
-                          fontFamily: Fonts.nunitoBlack, textAlign: TextAlign.center,
+                          fontFamily: Fonts.nunitoBlack,
+                          textAlign: TextAlign.center,
                         ),
                         const Gap(10),
                         const BodyText(
                           title: AppStrings.loginText,
                           fontSize: 16,
                           fontColor: AppColor.textColor,
-                          fontFamily: Fonts.nunitoBold, textAlign: TextAlign.center,
+                          fontFamily: Fonts.nunitoBold,
+                          textAlign: TextAlign.center,
                         ),
                         const Gap(30),
                         InputText(
@@ -110,7 +112,8 @@ class _SignInState extends State<SignIn> {
                             title: AppStrings.dontHaveAccount,
                             fontSize: 16,
                             fontColor: AppColor.buttonColor,
-                            fontFamily: Fonts.nunitoExtraBold, textAlign: TextAlign.center,
+                            fontFamily: Fonts.nunitoExtraBold,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],

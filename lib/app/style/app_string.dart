@@ -13,7 +13,7 @@ class AppStrings {
       'The ultimate digital notebook that combines unparalleled security, vast storage, and intelligent features.';
   static const onboardingTextMain_3 = 'Unleash your\n productivity with Notely';
   static const onboardingTextBody_3 =
-      'Join the ranks of over 15 million users worldwide who trust Notely to capture, organize, and empower their ideas like never before.';
+      'Join the ranks of over 15 million users worldwide who trust Notely to capture, and organize their ideas like never before.';
   static const createAccount = 'Create a free acount';
   static const createAccountButton = 'Create account';
   static const login = 'Login';

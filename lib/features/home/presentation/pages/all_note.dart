@@ -1,4 +1,6 @@
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
@@ -10,9 +12,8 @@ import 'package:provider/provider.dart';
 class AllNoteScreen extends StatefulWidget {
   static const String id = 'all-Note';
   const AllNoteScreen({
-    super.key, //required this.fab
+    super.key,
   });
-  //final FloatingActionButton fab;
 
   @override
   State<AllNoteScreen> createState() => _AllNoteScreenState();
@@ -29,7 +30,8 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
             backgroundColor: AppColor.background,
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                padding: const EdgeInsets.only(
+                    top: 10, left: 10, right: 10, bottom: 15),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -43,7 +45,6 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                         suffixOnPress: () {},
                         isIcon: false,
                       ),
-                      
                       state.allNotes.isEmpty
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -105,9 +106,6 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                   decoration: BoxDecoration(
                                     color: AppColor.cardColor,
                                     borderRadius: BorderRadius.circular(12),
-                                    // border: Border.all(
-                                    //   color: AppColor.textColor,
-                                    // ),
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -128,6 +126,21 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                         fontFamily: Fonts.nunitoBold,
                                         textAlign: TextAlign.start,
                                       ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              provider.deleteNote(index);
+                                            },
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: AppColor.titleColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -139,14 +152,47 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
               ),
             ),
             floatingActionButton: state.allNotes.isNotEmpty
-                ? FloatingActionButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, AddNoteScreen.id);
-                    },
-                    backgroundColor: AppColor.buttonColor,
-                    child: const Icon(
-                      Icons.add,
-                      color: AppColor.buttonTextColor,
+                ? DraggableFab(
+                    child: SpeedDial(
+                      activeBackgroundColor: AppColor.buttonColor,
+                      backgroundColor: AppColor.buttonColor,
+                      foregroundColor: AppColor.cardColor,
+                      activeForegroundColor: AppColor.cardColor,
+                      icon: Icons.add,
+                      activeIcon: Icons.close,
+                      curve: Curves.bounceInOut,
+                      spaceBetweenChildren: 12,
+                      children: [
+                        SpeedDialChild(
+                            backgroundColor: Colors.blue,
+                            child: const Icon(
+                              Icons.edit,
+                              color: AppColor.cardColor,
+                            ),
+                            label: 'Text',
+                            labelBackgroundColor: AppColor.background,
+                            onTap: () {
+                              Navigator.pushNamed(context, AddNoteScreen.id);
+                            }),
+                        SpeedDialChild(
+                          backgroundColor: Colors.green,
+                          child: const Icon(
+                            Icons.camera_alt_outlined,
+                            color: AppColor.cardColor,
+                          ),
+                          label: 'Picture to Text',
+                          labelBackgroundColor: AppColor.background,
+                        ),
+                        SpeedDialChild(
+                          backgroundColor: Colors.purple,
+                          child: const Icon(
+                            Icons.record_voice_over_outlined,
+                            color: AppColor.cardColor,
+                          ),
+                          label: 'Voice to Text',
+                          labelBackgroundColor: AppColor.background,
+                        )
+                      ],
                     ),
                   )
                 : null);
