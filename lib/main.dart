@@ -12,13 +12,14 @@ import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
 import 'package:notely/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
+import 'package:notely/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 import 'boxes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   noteBox = await Hive.openBox<NoteModel>('personBox');

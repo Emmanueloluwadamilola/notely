@@ -87,6 +87,7 @@ class _SignInState extends State<SignIn> {
                           focus: emailFocus,
                           title: AppStrings.email,
                           showPassword: false,
+                          hint: '@mail.com',
                         ),
                         InputText(
                           isPassword: true,
@@ -95,6 +96,7 @@ class _SignInState extends State<SignIn> {
                           keyboard: TextInputType.text,
                           focus: passwordFocus,
                           title: AppStrings.password,
+                          hint: 'password',
                         ),
                         const Gap(80),
                         MainButton(

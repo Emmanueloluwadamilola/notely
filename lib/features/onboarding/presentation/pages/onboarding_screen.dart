@@ -84,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         const Gap(40),
         MainButton(
           buttonText: AppStrings.getStarted,
-          disabled: false,
+          disabled: pageIndex < 2,
           loading: false,
           callback: () {
             Navigator.pushNamed(context, SignUp.id);

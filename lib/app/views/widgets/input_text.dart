@@ -12,14 +12,14 @@ class InputText extends StatefulWidget {
       required this.keyboard,
       required this.focus,
       required this.title,
-    });
+      required this.hint});
   bool isPassword;
-   TextEditingController controller;
+  TextEditingController controller;
   final TextInputType keyboard;
   final FocusNode focus;
   final String title;
   bool showPassword;
-
+  final String hint;
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -29,19 +29,22 @@ class _InputTextState extends State<InputText> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.title,
-            style: const TextStyle(
-                fontFamily: Fonts.nunitoBold,
-                fontSize: 12,
-                color: AppColor.titleColor),
+          Padding(
+            padding: const EdgeInsets.only(left: 7),
+            child: Text(
+              widget.title,
+              style: const TextStyle(
+                  fontFamily: Fonts.nunitoBold,
+                  fontSize: 12,
+                  color: AppColor.titleColor),
+            ),
           ),
-          const Gap(5),
           Container(
+            // padding: const EdgeInsets.only(top: 5),
             height: 60,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -59,14 +62,20 @@ class _InputTextState extends State<InputText> {
                 setState(() {
                   widget.controller.text = value;
                 });
-                
               },
               style: const TextStyle(
                   fontFamily: Fonts.nunitoBold,
                   fontSize: 16,
                   color: AppColor.textColor),
               decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 15, right: 5),
+                  hintText: widget.hint,
+                  hintStyle: const TextStyle(color: AppColor.hintTextColor),
+                  contentPadding: widget.isPassword
+                      ? const EdgeInsets.only(
+                          left: 15,
+                          right: 5,
+                        )
+                      : const EdgeInsets.only(left: 15, right: 5, top: 8),
                   border: InputBorder.none,
                   suffix: widget.isPassword
                       ? IconButton(

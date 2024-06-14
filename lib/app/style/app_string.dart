@@ -42,4 +42,6 @@ class AppStrings {
   static const email = 'Email Address';
   static const password = 'Password';
   static const name = 'Full Name';
+  static const city = 'City';
+  static const selectCountry = 'Select your Country';
 }

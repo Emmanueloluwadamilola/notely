@@ -19,6 +19,16 @@ class AuthenticationProvider extends DisposableProvider {
     notifyListeners();
   }
 
+  setCountry(country) {
+    state.countryName = country;
+    notifyListeners();
+  }
+
+  setCity(city) {
+    state.city = city;
+    notifyListeners();
+  }
+
   @override
   void disposeValues() {
     // TODO: implement disposeValues
