@@ -17,8 +17,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  FocusNode passwordFocus = FocusNode();
-  FocusNode emailFocus = FocusNode();
+  
   AuthenticationProvider? _provider;
 
   @override
@@ -84,24 +83,24 @@ class _SignInState extends State<SignIn> {
                           isPassword: false,
                           controller: emailController,
                           keyboard: TextInputType.emailAddress,
-                          focus: emailFocus,
+                          focus: state.emailFocus,
                           title: AppStrings.email,
                           showPassword: false,
-                          hint: '@mail.com',
+                          hint: '@mail.com', validationText: state.emailError,
                         ),
                         InputText(
                           isPassword: true,
                           showPassword: true,
                           controller: passwordController,
                           keyboard: TextInputType.text,
-                          focus: passwordFocus,
+                          focus: state.passwordFocus,
                           title: AppStrings.password,
-                          hint: 'password',
+                          hint: 'password', validationText: state.passwordError,
                         ),
                         const Gap(80),
                         MainButton(
                           buttonText: AppStrings.login,
-                          disabled: emailController.text.isEmpty ||
+                          disabled: emailController.text.isEmpty || state.emailError.isNotEmpty || state.passwordError.isNotEmpty||
                               passwordController.text.isEmpty,
                           loading: state.isLoading,
                           callback: () {

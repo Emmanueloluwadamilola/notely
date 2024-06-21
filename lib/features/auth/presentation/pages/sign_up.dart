@@ -1,6 +1,5 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/features/auth/presentation/manager/auth_provider.dart';
@@ -20,10 +19,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  FocusNode cityFocus = FocusNode();
-  FocusNode nameFocus = FocusNode();
-  FocusNode passwordFocus = FocusNode();
-  FocusNode emailFocus = FocusNode();
+  
   AuthenticationProvider? _provider;
 
   @override
@@ -42,6 +38,9 @@ class _SignUpState extends State<SignUp> {
           _provider?.setName(nameController.text);
         },
       );
+      cityController.addListener(() {
+        _provider?.setCity(cityController.text);
+      },);
     });
     super.initState();
   }
@@ -93,26 +92,29 @@ class _SignUpState extends State<SignUp> {
                           controller: nameController,
                           isPassword: false,
                           keyboard: TextInputType.name,
-                          focus: nameFocus,
+                          focus: state.nameFocus,
                           title: AppStrings.name,
                           hint: 'John Bull',
+                          validationText: state.nameError,
                         ),
                         InputText(
                           isPassword: false,
                           controller: emailController,
                           keyboard: TextInputType.emailAddress,
-                          focus: emailFocus,
+                          focus: state.emailFocus,
                           title: AppStrings.email,
                           hint: '@mail.com',
+                          validationText: state.emailError,
                         ),
                         InputText(
                           isPassword: true,
                           showPassword: true,
                           controller: passwordController,
                           keyboard: TextInputType.text,
-                          focus: passwordFocus,
+                          focus: state.passwordFocus,
                           title: AppStrings.password,
                           hint: '**********',
+                          validationText: state.passwordError,
                         ),
                         GestureDetector(
                           onTap: () => showCountryPicker(
@@ -153,9 +155,10 @@ class _SignUpState extends State<SignUp> {
                           isPassword: false,
                           controller: cityController,
                           keyboard: TextInputType.name,
-                          focus: cityFocus,
+                          focus: state.cityFocus,
                           title: AppStrings.city,
                           hint: 'Califonia',
+                          validationText: '',
                         ),
                         const Gap(40),
                         MainButton(
@@ -164,6 +167,10 @@ class _SignUpState extends State<SignUp> {
                               passwordController.text.isEmpty ||
                               state.countryName == null ||
                               cityController.text.isEmpty ||
+                              state.emailError.isNotEmpty ||
+                              state.passwordError.isNotEmpty ||
+                              state.nameError.isNotEmpty ||
+                              state.cityError.isNotEmpty ||
                               nameController.text.isEmpty,
                           loading: state.isLoading,
                           callback: () {

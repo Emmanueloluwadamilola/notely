@@ -9,15 +9,21 @@ import 'package:provider/provider.dart';
 
 class AddNoteScreen extends StatefulWidget {
   static const String id = 'add-note';
-  const AddNoteScreen({super.key});
+  const AddNoteScreen(
+      {super.key, required this.isUpdate, this.index, this.note});
+  final int? index;
+  final bool isUpdate;
+  final List<NoteModel>? note;
 
   @override
   State<AddNoteScreen> createState() => _AddNoteScreenState();
 }
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController bodyController = TextEditingController();
+  late TextEditingController titleController = TextEditingController(
+      text: widget.isUpdate == true ? widget.note![widget.index!].title : '');
+  late TextEditingController bodyController = TextEditingController(
+      text: widget.isUpdate == true ? widget.note![widget.index!].body : '');
   FocusNode titleNode = FocusNode();
   FocusNode bodyNode = FocusNode();
   NoteProvider? _noteProvider;
@@ -55,7 +61,9 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
               children: [
                 const Gap(10),
                 ToolBarWidget(
-                    title: AppStrings.editNotes,
+                    title: widget.isUpdate
+                        ? AppStrings.updateNote
+                        : AppStrings.writeNote,
                     suffixIcon: Icons.more_vert_outlined,
                     prefixicon: Icons.arrow_back_ios_new_outlined,
                     prefixOnPress: () {
@@ -79,6 +87,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                               fontFamily: Fonts.nunitoBlack,
                               fontSize: 24,
                               color: AppColor.titleColor),
+                          onChanged: (value) {
+                            setState(() {
+                              titleController.text = value;
+                            });
+                          },
                         ),
                         TextField(
                           controller: bodyController,
@@ -92,6 +105,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                               fontFamily: Fonts.nunitoBold,
                               fontSize: 18,
                               color: AppColor.textColor),
+                          onChanged: (value) {
+                            setState(() {
+                              bodyController.text = value;
+                            });
+                          },
                         ),
                       ],
                     ),
@@ -106,14 +124,17 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 ? FloatingActionButton.extended(
                     backgroundColor: AppColor.buttonColor,
                     onPressed: () {
-                      provider.saveNote(state.title, state.body);
+                      widget.isUpdate
+                          ? provider.updateNote(widget.index,
+                              titleController.text, bodyController.text)
+                          : provider.saveNote(state.title, state.body);
                       titleController.clear();
                       bodyController.clear();
                       Navigator.pushNamed(context, AllNoteScreen.id);
                     },
-                    label: const Text(
-                      'Save Note',
-                      style: TextStyle(
+                    label: Text(
+                      widget.isUpdate ? 'Update Note' : 'Save Note',
+                      style: const TextStyle(
                         fontFamily: Fonts.nunitoExtraBold,
                         color: AppColor.buttonTextColor,
                       ),

@@ -15,14 +15,13 @@ import 'package:notely/features/settings/presentation/manager/setting_provider.d
 import 'package:notely/firebase_options.dart';
 import 'package:provider/provider.dart';
 
-import 'boxes.dart';
-
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
-  noteBox = await Hive.openBox<NoteModel>('personBox');
+  await Hive.openBox<NoteModel>('myBox');
+
   runApp(const MyApp());
 }
 
@@ -44,20 +43,20 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home:  Scaffold(
+        home: Scaffold(
           backgroundColor: AppColor.background,
-          body:  StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          // User is logged in
-          return const AllNoteScreen(); // Replace with your app's home screen
-        } else {
-          // User is not logged in
-          return const OnboardingScreen();
-        }
-      },
-    ),
+          body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                // User is logged in
+                return const AllNoteScreen(); // Replace with your app's home screen
+              } else {
+                // User is not logged in
+                return const OnboardingScreen();
+              }
+            },
+          ),
           // floatingActionButton: ,
         ),
         onGenerateRoute: _generateRoute,
@@ -76,7 +75,12 @@ class MyApp extends StatelessWidget {
       case OnboardingScreen.id:
         return settings.route(const OnboardingScreen());
       case AddNoteScreen.id:
-        return settings.route(const AddNoteScreen());
+        final args = settings.arguments as AddNoteScreen;
+        return settings.route(AddNoteScreen(
+          isUpdate: args.isUpdate,
+          index: args.index,
+          note: args.note,
+        ));
 
       default:
         return MaterialPageRoute(

@@ -24,7 +24,8 @@ class BodyText extends StatelessWidget {
       required this.title,
       required this.fontSize,
       required this.fontColor,
-      required this.fontFamily, required this.textAlign});
+      required this.fontFamily,
+      required this.textAlign});
   final String? title;
   final double fontSize;
   final Color fontColor;
@@ -40,6 +41,24 @@ class BodyText extends StatelessWidget {
         fontFamily: fontFamily,
         fontSize: fontSize,
         color: fontColor,
+      ),
+    );
+  }
+}
+
+class ValidationText extends StatelessWidget {
+  const ValidationText({super.key, required this.text});
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4),
+      child: Text(
+        text,
+        style: const TextStyle(
+            color: AppColor.red, fontFamily: Fonts.nunitoRegular, fontSize: 13),
+        textAlign: TextAlign.left,
       ),
     );
   }

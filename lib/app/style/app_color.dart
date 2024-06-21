@@ -14,4 +14,5 @@ class AppColor {
   static const subscriptionText = Color(0xFF5A5266);
   static const inactiveButton = Color.fromARGB(53, 217, 97, 76);
   static const hintTextColor = Color.fromARGB(116, 158, 153, 147);
+  static const red = Colors.red;
 }

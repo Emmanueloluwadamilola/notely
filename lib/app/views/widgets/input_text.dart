@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:notely/app/style/style.dart';
+import 'package:notely/app/app.dart';
 
 // ignore: must_be_immutable
 class InputText extends StatefulWidget {
@@ -12,7 +12,8 @@ class InputText extends StatefulWidget {
       required this.keyboard,
       required this.focus,
       required this.title,
-      required this.hint});
+      required this.hint,
+      required this.validationText});
   bool isPassword;
   TextEditingController controller;
   final TextInputType keyboard;
@@ -20,6 +21,7 @@ class InputText extends StatefulWidget {
   final String title;
   bool showPassword;
   final String hint;
+  final String validationText;
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -77,7 +79,7 @@ class _InputTextState extends State<InputText> {
                         )
                       : const EdgeInsets.only(left: 15, right: 5, top: 8),
                   border: InputBorder.none,
-                  suffix: widget.isPassword
+                  suffix: widget.isPassword && widget.focus.hasFocus
                       ? IconButton(
                           onPressed: () {
                             setState(() {
@@ -86,14 +88,15 @@ class _InputTextState extends State<InputText> {
                           },
                           icon: Icon(
                             widget.showPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             color: AppColor.textColor,
                           ),
                         )
                       : null),
             ),
           ),
+          ValidationText(text: widget.validationText),
         ],
       ),
     );

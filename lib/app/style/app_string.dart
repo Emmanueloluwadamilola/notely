@@ -29,6 +29,8 @@ class AppStrings {
   static const recent = 'Recent Notes';
   static const allNotes = 'All Notes';
   static const editNotes = 'Edit Note';
+  static const updateNote = 'Update Note';
+  static const writeNote = 'Write Note';
   static const premium = 'Buy Premium';
   static const notification = 'Notification';
   static const theme = 'App Theme';
@@ -44,4 +46,7 @@ class AppStrings {
   static const name = 'Full Name';
   static const city = 'City';
   static const selectCountry = 'Select your Country';
+  static const deleteDialog = 'Are you sure you want to delete this note?';
+  static const delete = 'delete';
+  static const cancel = 'cancel';
 }
