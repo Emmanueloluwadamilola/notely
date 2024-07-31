@@ -1,10 +1,9 @@
 import 'package:draggable_fab/draggable_fab.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:gap/gap.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/app/views/widgets/loading_widget.dart';
 import 'package:notely/app/views/widgets/tool_bar.dart';
@@ -13,6 +12,7 @@ import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/pick_image_screen.dart';
 import 'package:notely/features/home/presentation/pages/voice_to_text.dart';
 import 'package:notely/features/home/presentation/pages/widgets/dialog_box.dart';
+import 'package:notely/features/settings/presentation/pages/setting.dart';
 import 'package:provider/provider.dart';
 
 class AllNoteScreen extends StatefulWidget {
@@ -38,6 +38,7 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
   Widget build(BuildContext context) {
     return Consumer<NoteProvider>(
       builder: (BuildContext context, provider, _) {
+        _noteProvider ??= provider;
         final state = provider.state;
 
         return Scaffold(
@@ -56,7 +57,10 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                 : AppStrings.recent,
                             prefixImageIcon: const AssetImage(AppIcon.menu),
                             suffixIcon: Icons.search_outlined,
-                            prefixOnPress: () {},
+                            prefixOnPress: () {
+                              ZoomDrawer.of(context)!.toggle();
+                              // Navigator.pushNamed(context, SettingScreen.id);
+                            },
                             suffixOnPress: () {},
                             isIcon: false,
                           ),
@@ -91,12 +95,18 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                         const Gap(60),
                                         const Gap(20),
                                         SpeedDial(
-                                          label: const Text(
-                                            AppStrings.createNoteButton,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: AppColor.buttonTextColor,
-                                                fontFamily: Fonts.nunitoBlack),
+                                          label: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 30, horizontal: 20),
+                                            child: Text(
+                                              AppStrings.createNoteButton,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color:
+                                                      AppColor.buttonTextColor,
+                                                  fontFamily:
+                                                      Fonts.nunitoBlack),
+                                            ),
                                           ),
                                           activeBackgroundColor:
                                               AppColor.buttonColor,
@@ -105,7 +115,8 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                           activeForegroundColor:
                                               AppColor.cardColor,
                                           icon: Icons.add,
-                                          iconTheme: IconThemeData(size: 30),
+                                          iconTheme:
+                                              const IconThemeData(size: 30),
                                           // activeIcon: Icons.close,
                                           curve: Curves.bounceInOut,
                                           spaceBetweenChildren: 12,

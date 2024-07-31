@@ -30,6 +30,7 @@ dependencies:
   permission_handler: ^11.3.1
   speech_to_text: ^6.6.2
   avatar_glow: ^3.0.1
+  flutter_zoom_drawer: ^3.2.0
 
 dev_dependencies:
   hive_generator: ^2.0.1

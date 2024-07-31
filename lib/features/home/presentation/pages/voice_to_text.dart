@@ -1,16 +1,12 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
-import 'package:notely/app/style/app_color.dart';
-import 'package:notely/app/style/app_fonts.dart';
 import 'package:notely/app/views/widgets/tool_bar.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/widgets/dialog_box.dart';
 import 'package:provider/provider.dart';
-import 'package:speech_to_text/speech_to_text.dart';
 
 class VoiceToTextScreen extends StatefulWidget {
   static const id = 'voiceToText';
