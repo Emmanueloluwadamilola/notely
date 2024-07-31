@@ -10,23 +10,32 @@ import 'package:provider/provider.dart';
 class AddNoteScreen extends StatefulWidget {
   static const String id = 'add-note';
   const AddNoteScreen(
-      {super.key, required this.isUpdate, this.index, this.note});
+      {super.key,
+      this.isUpdate = false,
+      this.index,
+      this.note,
+      this.imageText,
+      this.isImageToText = false});
   final int? index;
   final bool isUpdate;
   final List<NoteModel>? note;
+  final bool? isImageToText;
+  final String? imageText;
 
   @override
   State<AddNoteScreen> createState() => _AddNoteScreenState();
 }
 
 class _AddNoteScreenState extends State<AddNoteScreen> {
+  NoteProvider? _noteProvider;
   late TextEditingController titleController = TextEditingController(
       text: widget.isUpdate == true ? widget.note![widget.index!].title : '');
   late TextEditingController bodyController = TextEditingController(
-      text: widget.isUpdate == true ? widget.note![widget.index!].body : '');
+      text: widget.isUpdate == true
+          ? widget.note![widget.index!].body
+          : _noteProvider?.state.body);
   FocusNode titleNode = FocusNode();
   FocusNode bodyNode = FocusNode();
-  NoteProvider? _noteProvider;
 
   @override
   void initState() {
@@ -82,7 +91,10 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           focusNode: titleNode,
                           cursorColor: AppColor.buttonColor,
                           decoration: const InputDecoration(
-                              hintText: 'title', border: InputBorder.none),
+                              hintText: 'Enter title',
+                              hintStyle:
+                                  TextStyle(color: AppColor.hintTextColor),
+                              border: InputBorder.none),
                           style: const TextStyle(
                               fontFamily: Fonts.nunitoBlack,
                               fontSize: 24,
@@ -100,7 +112,10 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           maxLines: null,
                           cursorColor: AppColor.buttonColor,
                           decoration: const InputDecoration(
-                              hintText: 'Type here', border: InputBorder.none),
+                              hintStyle:
+                                  TextStyle(color: AppColor.hintTextColor),
+                              hintText: 'Type here',
+                              border: InputBorder.none),
                           style: const TextStyle(
                               fontFamily: Fonts.nunitoBold,
                               fontSize: 18,
@@ -130,6 +145,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           : provider.saveNote(state.title, state.body);
                       titleController.clear();
                       bodyController.clear();
+                      state.image == null;
                       Navigator.pushNamed(context, AllNoteScreen.id);
                     },
                     label: Text(

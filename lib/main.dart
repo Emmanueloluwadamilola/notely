@@ -10,6 +10,8 @@ import 'package:notely/features/home/domain/note.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
+import 'package:notely/features/home/presentation/pages/pick_image_screen.dart';
+import 'package:notely/features/home/presentation/pages/voice_to_text.dart';
 import 'package:notely/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
 import 'package:notely/firebase_options.dart';
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
                 return const AllNoteScreen(); // Replace with your app's home screen
               } else {
                 // User is not logged in
-                return const OnboardingScreen();
+                return const AllNoteScreen();
               }
             },
           ),
@@ -76,11 +78,17 @@ class MyApp extends StatelessWidget {
         return settings.route(const OnboardingScreen());
       case AddNoteScreen.id:
         final args = settings.arguments as AddNoteScreen;
-        return settings.route(AddNoteScreen(
-          isUpdate: args.isUpdate,
-          index: args.index,
-          note: args.note,
-        ));
+        return settings.route(
+          AddNoteScreen(
+            isUpdate: args.isUpdate,
+            index: args.index,
+            note: args.note,
+          ),
+        );
+      case PickImageScreen.id:
+        return settings.route(const PickImageScreen());
+      case VoiceToTextScreen.id:
+        return settings.route(const VoiceToTextScreen());
 
       default:
         return MaterialPageRoute(

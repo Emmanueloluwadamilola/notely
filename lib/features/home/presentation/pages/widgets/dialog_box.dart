@@ -3,19 +3,25 @@ import 'package:flutter/material.dart';
 import '../../../../../app/app.dart';
 
 class DeleteDialog extends StatelessWidget {
-  const DeleteDialog({super.key, required this.delete});
+  const DeleteDialog(
+      {super.key,
+      required this.delete,
+      required this.title,
+      required this.actionText});
   final VoidCallback delete;
+  final String title;
+  final String actionText;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppColor.background,
-      content: const BodyText(
-          title: AppStrings.deleteDialog,
+      content: BodyText(
+          title: title,
           fontSize: 20,
           fontColor: AppColor.textColor,
           fontFamily: Fonts.nunitoBold,
-          textAlign: TextAlign.center),
+          textAlign: TextAlign.start),
       actions: [
         TextButton(
             onPressed: () {
@@ -28,8 +34,8 @@ class DeleteDialog extends StatelessWidget {
             )),
         TextButton(
           onPressed: delete,
-          child: const Text(
-            AppStrings.delete,
+          child: Text(
+            actionText,
             style: TextStyle(
                 fontSize: 18, fontFamily: Fonts.titan, color: AppColor.red),
           ),

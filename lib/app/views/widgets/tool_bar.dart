@@ -6,17 +6,17 @@ class ToolBarWidget extends StatelessWidget {
       {super.key,
       required this.title,
       this.prefixImageIcon,
-      required this.suffixIcon,
-      required this.prefixOnPress,
-      required this.suffixOnPress,
+       this.suffixIcon,
+       this.prefixOnPress,
+       this.suffixOnPress,
       required this.isIcon,
       this.prefixicon});
   final String title;
   final ImageProvider<Object>? prefixImageIcon;
   final IconData? prefixicon;
-  final IconData suffixIcon;
-  final VoidCallback prefixOnPress;
-  final VoidCallback suffixOnPress;
+  final IconData? suffixIcon;
+  final VoidCallback? prefixOnPress;
+  final VoidCallback? suffixOnPress;
   final bool isIcon;
 
   @override

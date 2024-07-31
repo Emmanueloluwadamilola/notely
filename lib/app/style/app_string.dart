@@ -3,6 +3,7 @@ class AppStrings {
   static const getStarted = 'GET STARTED';
   static const alreadyAccount = 'Already have an account?';
   static const dontHaveAccount = "Don't have an Account?";
+  static const imageText = 'Image to Text';
   static const onboardingTextMain =
       'World’s Safest And\n Largest Digital Notebook';
   static const onboardingTextBody =
@@ -49,4 +50,9 @@ class AppStrings {
   static const deleteDialog = 'Are you sure you want to delete this note?';
   static const delete = 'delete';
   static const cancel = 'cancel';
+  static const pickAnImage = 'Pick an Image';
+  static const selectImageSource = 'Select Image Source';
+  static const camera = 'Camera';
+  static const gallery = 'Gallery';
+  
 }
