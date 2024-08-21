@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:notely/features/home/domain/note.dart';
+import 'package:notely/features/home/domain/model/note.dart';
 
 class NoteState {
   List<NoteModel> allNotes = [];

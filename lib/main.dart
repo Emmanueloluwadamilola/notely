@@ -1,27 +1,26 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notely/app/app.dart';
-import 'package:notely/features/auth/presentation/manager/auth_provider.dart';
-import 'package:notely/features/auth/presentation/pages/sign_in.dart';
-import 'package:notely/features/auth/presentation/pages/sign_up.dart';
-import 'package:notely/features/home/domain/note.dart';
+import 'package:notely/confiq/di/injector_container.dart';
+import 'package:notely/features/home/domain/model/note.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
 import 'package:notely/features/home/presentation/pages/home_screen.dart';
 import 'package:notely/features/home/presentation/pages/pick_image_screen.dart';
 import 'package:notely/features/home/presentation/pages/voice_to_text.dart';
+import 'package:notely/features/onboarding/presentation/manager/onboarding_provider.dart';
+import 'package:notely/features/onboarding/presentation/manager/splash_provider.dart';
 import 'package:notely/features/onboarding/presentation/pages/onboarding_screen.dart';
+import 'package:notely/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
 import 'package:notely/features/settings/presentation/pages/setting.dart';
-import 'package:notely/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await configureDependencies();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>('myBox');
@@ -37,9 +36,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
-        ChangeNotifierProvider(create: (_) => NoteProvider()),
-        ChangeNotifierProvider(create: (_) => SettingProvider()),
+        ChangeNotifierProvider(create: (_) => sl<NoteProvider>()),
+        ChangeNotifierProvider(create: (_) => sl<SettingProvider>()),
+        ChangeNotifierProvider(create: (_) => SplashProvider()),
+        ChangeNotifierProvider(create: (_) => OnboardingProvider()),
       ],
       child: MaterialApp(
         title: 'Notely',
@@ -47,22 +47,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: Scaffold(
-          backgroundColor: AppColor.background,
-          body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                // User is logged in
-                return const HomeScreen(); // Replace with your app's home screen
-              } else {
-                // User is not logged in
-                return const HomeScreen();
-              }
-            },
-          ),
-          // floatingActionButton: ,
-        ),
+        home: const SplashScreen(),
         onGenerateRoute: _generateRoute,
       ),
     );
@@ -70,10 +55,9 @@ class MyApp extends StatelessWidget {
 
   Route<dynamic> _generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case SignIn.id:
-        return settings.route(const SignIn());
-      case SignUp.id:
-        return settings.route(const SignUp());
+      case HomeScreen.id:
+        return settings.route(const HomeScreen());
+
       case AllNoteScreen.id:
         return settings.route(const AllNoteScreen());
       case OnboardingScreen.id:

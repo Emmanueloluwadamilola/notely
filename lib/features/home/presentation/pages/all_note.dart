@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/app/views/widgets/loading_widget.dart';
 import 'package:notely/app/views/widgets/tool_bar.dart';
+import 'package:notely/confiq/di/injector_container.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/pick_image_screen.dart';
@@ -27,6 +28,7 @@ class AllNoteScreen extends StatefulWidget {
 
 class _AllNoteScreenState extends State<AllNoteScreen> {
   NoteProvider? _noteProvider;
+  final _controller = sl.get<ZoomDrawerController>();
 
   @override
   void initState() {
@@ -58,7 +60,8 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                             prefixImageIcon: const AssetImage(AppIcon.menu),
                             suffixIcon: Icons.search_outlined,
                             prefixOnPress: () {
-                              ZoomDrawer.of(context)!.toggle();
+                              _controller.toggle?.call();
+                              // ZoomDrawer.of(context)!.toggle();
                               // Navigator.pushNamed(context, SettingScreen.id);
                             },
                             suffixOnPress: () {},
@@ -182,7 +185,9 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                         //   },
                                         // ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                           
+                                          },
                                           child: const BodyText(
                                             title: AppStrings.import,
                                             fontSize: 16,

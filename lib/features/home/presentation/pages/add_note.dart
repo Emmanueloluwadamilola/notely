@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/app/views/widgets/tool_bar.dart';
-import 'package:notely/features/home/domain/note.dart';
+import 'package:notely/features/home/domain/model/note.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
+import 'package:notely/features/home/presentation/pages/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteScreen extends StatefulWidget {
@@ -73,12 +74,16 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     title: widget.isUpdate
                         ? AppStrings.updateNote
                         : AppStrings.writeNote,
-                    suffixIcon: Icons.more_vert_outlined,
+                    suffixIcon: Icons.share,
                     prefixicon: Icons.arrow_back_ios_new_outlined,
                     prefixOnPress: () {
                       Navigator.pop(context);
                     },
-                    suffixOnPress: () {},
+                    suffixOnPress: () {
+                      PopupMenuButton(
+                          itemBuilder: (context) =>
+                              [PopupMenuItem(child: Text('Share'))]);
+                    },
                     isIcon: true),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -145,8 +150,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           : provider.saveNote(state.title, state.body);
                       titleController.clear();
                       bodyController.clear();
-                      state.image == null;
-                      Navigator.pushNamed(context, AllNoteScreen.id);
+                      state.image != null ? provider.deleteImage() : null;
+                      Navigator.pushNamed(context, HomeScreen.id);
                     },
                     label: Text(
                       widget.isUpdate ? 'Update Note' : 'Save Note',

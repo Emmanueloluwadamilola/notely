@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
+import 'package:notely/confiq/di/injector_container.dart';
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,11 +13,12 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Consumer<SettingProvider>(
       builder: (context, provider, _) {
         final state = provider.state;
         return Scaffold(
-          backgroundColor: AppColor.inactiveButton,
+          backgroundColor: AppColor.background,
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
@@ -72,7 +75,9 @@ class SettingScreen extends StatelessWidget {
                           title: 'Security',
                         ),
                         ProfileCard(
-                          onTap: () {},
+                          onTap: () {
+                          
+                          },
                           iconData: Icons.logout,
                           title: 'Log Out',
                         ),

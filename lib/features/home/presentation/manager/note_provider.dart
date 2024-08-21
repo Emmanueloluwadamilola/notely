@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:injectable/injectable.dart';
+import 'package:notely/confiq/di/injector_container.dart';
 import 'package:notely/confiq/helpers/disposable_provider.dart';
-import 'package:notely/features/home/domain/note.dart';
+import 'package:notely/features/home/domain/model/note.dart';
 import 'package:notely/features/home/presentation/manager/note_state.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+@lazySingleton
 class NoteProvider extends DisposableProvider {
   var state = NoteState();
   final SpeechToText speechToText = SpeechToText();
@@ -139,11 +142,9 @@ class NoteProvider extends DisposableProvider {
   /// and the SpeechToText plugin supports setting timeouts on the
   /// listen method.
   void stopListening() async {
-    
     await speechToText.stop();
 
     notifyListeners();
-
   }
 
   /// This is the callback that the SpeechToText plugin calls when
@@ -151,11 +152,13 @@ class NoteProvider extends DisposableProvider {
   onSpeechResult(SpeechRecognitionResult result) {
     state.body = "${state.body}${result.recognizedWords} ";
     state.textController.text = state.body;
-  
+
     state.isListening = false;
 
     notifyListeners();
   }
+
+
 
   @override
   void disposeValues() {
