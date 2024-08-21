@@ -11,7 +11,7 @@
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart' as _i1070;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:notely/confiq/di/injection_module.dart' as _i565;
+import 'package:notely/config/di/injection_module.dart' as _i977;
 import 'package:notely/features/home/presentation/manager/note_provider.dart'
     as _i647;
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart'
@@ -40,4 +40,4 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$InjectionModule extends _i565.InjectionModule {}
+class _$InjectionModule extends _i977.InjectionModule {}

@@ -1,5 +1,5 @@
-import 'package:notely/confiq/di/injector_container.dart';
-import 'package:notely/confiq/helpers/disposable_provider.dart';
+import 'package:notely/config/di/injector_container.dart';
+import 'package:notely/config/helpers/disposable_provider.dart';
 import 'package:notely/features/onboarding/presentation/manager/splash_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

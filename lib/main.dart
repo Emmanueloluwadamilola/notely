@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notely/app/app.dart';
-import 'package:notely/confiq/di/injector_container.dart';
+import 'package:notely/config/di/injector_container.dart';
 import 'package:notely/features/home/domain/model/note.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';

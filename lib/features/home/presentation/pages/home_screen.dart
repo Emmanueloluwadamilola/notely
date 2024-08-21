@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:notely/app/app.dart';
-import 'package:notely/confiq/di/injector_container.dart';
+import 'package:notely/config/di/injector_container.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
 import 'package:notely/features/settings/presentation/pages/setting.dart';
 

@@ -7,7 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
 import 'package:notely/app/views/widgets/loading_widget.dart';
 import 'package:notely/app/views/widgets/tool_bar.dart';
-import 'package:notely/confiq/di/injector_container.dart';
+import 'package:notely/config/di/injector_container.dart';
 import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/add_note.dart';
 import 'package:notely/features/home/presentation/pages/pick_image_screen.dart';

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
-import 'package:notely/confiq/di/injector_container.dart';
+import 'package:notely/config/di/injector_container.dart';
 import 'package:notely/features/settings/presentation/manager/setting_provider.dart';
 import 'package:provider/provider.dart';
 
