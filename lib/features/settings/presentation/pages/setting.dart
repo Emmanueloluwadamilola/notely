@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:notely/app/app.dart';
@@ -13,12 +12,11 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer<SettingProvider>(
       builder: (context, provider, _) {
         final state = provider.state;
         return Scaffold(
-          backgroundColor: AppColor.background,
+          backgroundColor: AppColor.cardColor,
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
@@ -39,20 +37,20 @@ class SettingScreen extends StatelessWidget {
                           child: Image.asset(ImageAsset.avatar),
                         ),
                         const Gap(10),
-                        BodyText(
-                          title: state.name,
-                          fontSize: 28,
-                          fontColor: AppColor.titleColor,
-                          fontFamily: Fonts.nunitoBlack,
-                          textAlign: TextAlign.center,
-                        ),
-                        BodyText(
-                          title: state.location,
-                          fontSize: 16,
-                          fontColor: AppColor.textColor,
-                          fontFamily: Fonts.nunitoExtraBold,
-                          textAlign: TextAlign.center,
-                        ),
+                        // BodyText(
+                        //   title: state.name,
+                        //   fontSize: 28,
+                        //   fontColor: AppColor.titleColor,
+                        //   fontFamily: Fonts.nunitoBlack,
+                        //   textAlign: TextAlign.center,
+                        // ),
+                        // BodyText(
+                        //   title: state.location,
+                        //   fontSize: 16,
+                        //   fontColor: AppColor.textColor,
+                        //   fontFamily: Fonts.nunitoExtraBold,
+                        //   textAlign: TextAlign.center,
+                        // ),
                         const Gap(30),
                         ProfileCard(
                           onTap: () {},
@@ -76,10 +74,10 @@ class SettingScreen extends StatelessWidget {
                         ),
                         ProfileCard(
                           onTap: () {
-                          
+                            
                           },
-                          iconData: Icons.logout,
-                          title: 'Log Out',
+                          iconData: Icons.info,
+                          title: 'About App',
                         ),
                       ],
                     ),

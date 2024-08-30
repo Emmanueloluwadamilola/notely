@@ -185,9 +185,7 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                         //   },
                                         // ),
                                         InkWell(
-                                          onTap: () {
-                                           
-                                          },
+                                          onTap: () {},
                                           child: const BodyText(
                                             title: AppStrings.import,
                                             fontSize: 16,
@@ -204,91 +202,103 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                   child: SingleChildScrollView(
                                     physics: const BouncingScrollPhysics(),
                                     child: MasonryGridView.builder(
-                                      shrinkWrap: true,
-                                      physics: const BouncingScrollPhysics(),
-                                      gridDelegate:
-                                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2),
-                                      itemCount: state.allNotes.length,
-                                      itemBuilder: (context, index) =>
-                                          GestureDetector(
-                                        onTap: () {
-                                          final args = AddNoteScreen(
-                                            isUpdate: true,
-                                            note: state.allNotes,
-                                            index: index,
-                                          );
-                                          Navigator.pushNamed(
-                                              context, AddNoteScreen.id,
-                                              arguments: args);
-                                        },
-                                        child: Container(
-                                          margin: const EdgeInsets.all(5),
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            color: AppColor.cardColor,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              BodyText(
-                                                title:
-                                                    state.allNotes[index].title,
-                                                fontSize: 16,
-                                                fontColor: AppColor.titleColor,
-                                                fontFamily: Fonts.nunitoBlack,
-                                                textAlign: TextAlign.start,
+                                        shrinkWrap: true,
+                                        physics: const BouncingScrollPhysics(),
+                                        gridDelegate:
+                                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2),
+                                        itemCount: state.allNotes.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              final args = AddNoteScreen(
+                                                isUpdate: true,
+                                                note: state.allNotes,
+                                                index: index,
+                                              );
+                                              Navigator.pushNamed(
+                                                  context, AddNoteScreen.id,
+                                                  arguments: args);
+                                            },
+                                            child: Container(
+                                              margin: const EdgeInsets.all(5),
+                                              padding: const EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                color: AppColor.cardColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
                                               ),
-                                              const Gap(5),
-                                              BodyText(
-                                                title:
-                                                    state.allNotes[index].body,
-                                                fontSize: 14,
-                                                fontColor: AppColor.textColor,
-                                                fontFamily: Fonts.nunitoBold,
-                                                textAlign: TextAlign.start,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return DeleteDialog(
-                                                              delete: () {
-                                                                provider
-                                                                    .deleteNote(
-                                                                        index);
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                              title: AppStrings
-                                                                  .deleteDialog,
-                                                              actionText:
-                                                                  AppStrings
-                                                                      .delete,
-                                                            );
-                                                          });
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.delete,
-                                                      color:
-                                                          AppColor.titleColor,
-                                                    ),
+                                                  BodyText(
+                                                    title: state
+                                                        .allNotes[index].title,
+                                                    fontSize: 16,
+                                                    fontColor:
+                                                        AppColor.titleColor,
+                                                    fontFamily:
+                                                        Fonts.nunitoBlack,
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                  const Gap(5),
+                                                  BodyText(
+                                                    title: state.allNotes[index]
+                                                                .body!.length >
+                                                            200
+                                                        ? state.allNotes[index]
+                                                            .body!.characters
+                                                            .take(200)
+                                                            .toString()
+                                                        : state.allNotes[index]
+                                                            .body,
+                                                    fontSize: 14,
+                                                    fontColor:
+                                                        AppColor.textColor,
+                                                    fontFamily:
+                                                        Fonts.nunitoBold,
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      IconButton(
+                                                        onPressed: () {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return DeleteDialog(
+                                                                  delete: () {
+                                                                    provider
+                                                                        .deleteNote(
+                                                                            index);
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  title: AppStrings
+                                                                      .deleteDialog,
+                                                                  actionText:
+                                                                      AppStrings
+                                                                          .delete,
+                                                                );
+                                                              });
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.delete,
+                                                          color: AppColor
+                                                              .titleColor,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                            ),
+                                          );
+                                        }),
                                   ),
                                 ),
                         ],

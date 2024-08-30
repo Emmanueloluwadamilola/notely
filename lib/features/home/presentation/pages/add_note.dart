@@ -7,6 +7,7 @@ import 'package:notely/features/home/presentation/manager/note_provider.dart';
 import 'package:notely/features/home/presentation/pages/all_note.dart';
 import 'package:notely/features/home/presentation/pages/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class AddNoteScreen extends StatefulWidget {
   static const String id = 'add-note';
@@ -63,6 +64,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     return Consumer<NoteProvider>(builder: (context, provider, _) {
       _noteProvider ??= provider;
       final state = provider.state;
+
       return Scaffold(
         backgroundColor: AppColor.background,
         body: SafeArea(
@@ -80,9 +82,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       Navigator.pop(context);
                     },
                     suffixOnPress: () {
-                      PopupMenuButton(
-                          itemBuilder: (context) =>
-                              [PopupMenuItem(child: Text('Share'))]);
+                      Share.share(
+                        widget.isUpdate
+                            ? '${state.allNotes[widget.index!].title} \n ${state.allNotes[widget.index!].body}'
+                            : '${titleController.text} \n ${bodyController.text}',
+                      );
                     },
                     isIcon: true),
                 Padding(
