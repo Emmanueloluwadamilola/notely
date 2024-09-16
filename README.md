@@ -1,8 +1,10 @@
-# notely
+# Notely
+
+## About App
 
 A Note Taking App.
 
-### Functionality
+### Functionalities
 - Text input via keyboard
 - Picture to text conversion
 - Audio to text conversion

@@ -50,7 +50,7 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                   ? LoadingWidget.loadingDiad(context)
                   : Padding(
                       padding: const EdgeInsets.only(
-                          top: 10, left: 10, right: 10, bottom: 15),
+                          top: 10, left: 10, right: 10, bottom: 20),
                       child: Column(
                         children: [
                           ToolBarWidget(
@@ -97,6 +97,7 @@ class _AllNoteScreenState extends State<AllNoteScreen> {
                                         ),
                                         const Gap(60),
                                         const Gap(20),
+
                                         SpeedDial(
                                           label: const Padding(
                                             padding: EdgeInsets.symmetric(
